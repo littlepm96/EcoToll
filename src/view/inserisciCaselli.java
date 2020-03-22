@@ -1,29 +1,51 @@
 package view;
 
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.text.html.HTMLDocument.Iterator;
+
+import view.Login;
 import Controller.AutostradaCTRL;
 import Controller.CaselloCTRL;
+import Controller.LoginController;
 import model.components.Autostrada;
 import model.components.Casello;
+import model.components.Database;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.awt.Color;
+import java.awt.Component;
+
 import javax.swing.JTextField;
+import javax.swing.JTextPane;
+import javax.swing.AbstractButton;
+import javax.swing.GroupLayout;
 
-public class cancellaCaselli extends JFrame {
+public class inserisciCaselli extends JFrame {
 
-	private JTextField textField;
+	JTextField textField;
 	private JTextField textField_1;
+	private JTextField textField_2;
+	private JTextField textField_3;
 	String a;
 
 	// SCHERMATA INIZIALE
 
-	public cancellaCaselli(String username) {
+	public inserisciCaselli(String username) {
 		getContentPane().setLayout(null);
 		setBounds(100, 100, 462, 353);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -54,21 +76,28 @@ public class cancellaCaselli extends JFrame {
 		getContentPane().add(textField_1);
 		textField_1.setColumns(10);
 
+		textField_2 = new JTextField();
+		textField_2.setBounds(272, 137, 130, 26);
+		getContentPane().add(textField_2);
+		textField_2.setColumns(10);
+
+		textField_3 = new JTextField();
+		textField_3.setBounds(272, 175, 130, 26);
+		getContentPane().add(textField_3);
+		textField_3.setColumns(10);
+
 		// BOTTONE REFRESH
 
 		JButton btnRefresh = new JButton("refresh");
 		btnRefresh.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cancellaCaselli f = new cancellaCaselli(username);
+				inserisciCaselli f = new inserisciCaselli(username);
 				f.setVisible(true);
 				dispose();
 
 			}
 		});
 		// DIMENSIONI BOTTONE REFRESH
-
-//btnRefresh.setBounds(198, 6, 117, 29);
-//getContentPane().add(btnRefresh);
 
 		// SERIE DI LABEL
 		JLabel lblAutostrada = new JLabel("autostrada");
@@ -79,40 +108,77 @@ public class cancellaCaselli extends JFrame {
 		lblID.setBounds(47, 104, 76, 16);
 		getContentPane().add(lblID);
 
-		// BOTTONE CANCELLA
+		JLabel lblKm = new JLabel("km");
+		lblKm.setBounds(47, 142, 76, 16);
+		getContentPane().add(lblKm);
 
-		JButton btnCancella = new JButton("Cancella");
-		btnCancella.addActionListener(new ActionListener() {
+		JLabel lblNome = new JLabel("Nome");
+		lblNome.setBounds(47, 180, 61, 16);
+		getContentPane().add(lblNome);
+
+		// BOTTONE INSERISCI
+
+		JButton btnInserisci = new JButton("inserisci");
+		btnInserisci.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String autostrada = textField.getText();
+				Autostrada a = new AutostradaCTRL().getAutostrada(autostrada);
+				ArrayList<Casello> array = new CaselloCTRL().getCaselli(a);
+				String codice = textField_1.getText();
+				for (Casello q : array) {
+					if (q.getId().equals(codice)) {
+						codice = "";
+						break;
+					}
+				}
 
-				Casello c = new Casello(1, textField_1.getText(),textField.getText());
-				new CaselloCTRL().delete(c);
+				String km = textField_2.getText();
+				String nome = textField_3.getText();
+				if (codice.equals("") || km.equals("") || Integer.valueOf(km).equals(null) || Integer.valueOf(km) < 0) {
 
-				
-				btnRefresh.doClick();
-				
+					JOptionPane.showMessageDialog(null, "casello non valido");
+				} else {
 
+					Casello c = new Casello(Integer.valueOf(km), codice, autostrada, nome);
+
+					int J = JOptionPane.showConfirmDialog(null, "vuoi?", "", 0);
+					if (J == 1) {
+
+					} else {
+						new CaselloCTRL().insert(c);
+
+						btnRefresh.doClick();
+						JOptionPane.showMessageDialog(null, "inserito");
+					}
+				}
 			}
 		});
-		// DIMENSIONI BOTTONE CANCELLA
+		// DIMENSIONE BOTTONE INSERISCI
 
-		btnCancella.setBounds(47, 224, 117, 29);
-		getContentPane().add(btnCancella);
+		btnInserisci.setBounds(20, 225, 117, 29);
+		getContentPane().add(btnInserisci);
 
 		// Bottone Mostra Tutto
 
 		JButton btnMostraTutto = new JButton("Mostra Tutto");
 		btnMostraTutto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Autostrada q = new AutostradaCTRL().getAutostrada(textField.getText());
-				mostra m = new mostra(q);
-				m.setVisible(true);
-				m.setBounds(200, 200, 450, 339);
+				if (textField.getText().equals("")) {
+					mostra m = new mostra();
+					m.setVisible(true);
+					m.setBounds(200, 200, 450, 339);
+				} else {
+					Autostrada q = new AutostradaCTRL().getAutostrada(textField.getText());
+					mostra m = new mostra(q);
+					m.setVisible(true);
+					m.setBounds(200, 200, 450, 339);
+
+				}
 			}
 		});
 		// Dimensioni bottone Mostra Tutto
 
-		btnMostraTutto.setBounds(285, 224, 117, 29);
+		btnMostraTutto.setBounds(285, 225, 117, 29);
 		getContentPane().add(btnMostraTutto);
 
 		// LABEL CASELLI
@@ -126,8 +192,8 @@ public class cancellaCaselli extends JFrame {
 		codlist = new AutostradaCTRL().getCodAutostrada();
 		codlist.add(0, "");
 		String[] codicevar = new String[codlist.size()];
-		JComboBox jComboBox = new JComboBox(codlist.toArray(codicevar));
-		JComboBox codiceComboBox = jComboBox;
+		JComboBox<String> jComboBox = new JComboBox(codlist.toArray(codicevar));
+		JComboBox<String> codiceComboBox = jComboBox;
 
 		// DIMENSIONI COMBO BOX
 
@@ -153,7 +219,6 @@ public class cancellaCaselli extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				String codiceSelected = (String) comboBox_1.getSelectedItem();
-				textField_1.setText(codiceSelected);
 
 			}
 		});

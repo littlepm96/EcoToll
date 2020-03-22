@@ -37,8 +37,7 @@ public class ModCasello extends JFrame {
 	private JTextField textField_3;
 	private JTextField textField_4;
 	private String autostrada;
-	
-	
+
 	private Casello c;
 
 	public ModCasello(String user) {
@@ -118,27 +117,24 @@ public class ModCasello extends JFrame {
 				System.out.println(km);
 				String nome = textField_2.getText();
 				String autostrada = textField_4.getText();
-		
+
 				int J = JOptionPane.showConfirmDialog(null, "vuoi?", "", 0);
 				if (J == 1) {
 					// ModCasello q = new ModCasello(user);
 					// q.setVisible(true);
 					// dispose();
-					
+
 				} else {
-					c = new Casello(Integer.valueOf(km), codice, autostrada,nome);
-					
-					
+					c = new Casello(Integer.valueOf(km), codice, autostrada, nome);
+
 					new CaselloCTRL().modCasello(c);
-					
-				
+
 					ModCasello q = new ModCasello(user);
 					q.setVisible(true);
 					dispose();
-					
 
-
-			}}
+				}
+			}
 		});
 
 		// COMBO BOX
@@ -163,11 +159,11 @@ public class ModCasello extends JFrame {
 
 		codiceComboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				String codiceSelected = codiceComboBox.getSelectedItem().toString();
-				
-				autostrada=codiceSelected;
-				//textField_1.setText(codiceSelected);
+
+				autostrada = codiceSelected;
+				// textField_1.setText(codiceSelected);
 				create2(comboBox_1);
 
 			}
@@ -175,17 +171,16 @@ public class ModCasello extends JFrame {
 
 		comboBox_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			
-				
+
 				String codiceSelected = (String) comboBox_1.getSelectedItem();
-				
-				c=new CaselloCTRL().getCaselli(codiceSelected);
-				
+
+				c = new CaselloCTRL().getCaselli(codiceSelected);
+
 				textField_1.setText(c.getId());
 				textField_4.setText(c.getIdAuto());
 				textField_3.setText(Integer.toString(c.getKm()));
 				textField_2.setText(c.getNome());
-				
+
 			}
 		});
 

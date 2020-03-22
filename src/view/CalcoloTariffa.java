@@ -121,11 +121,15 @@ public class CalcoloTariffa extends JFrame {// da rifare
 		JButton btnEffettuaPagamento = new JButton("effettua pagamento");
 		btnEffettuaPagamento.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (textField_1.getText().equals("")) {JOptionPane.showMessageDialog(null, "calcola l'importo da pagare");return;}
-				if(rdbtnContanti.isSelected())JOptionPane.showMessageDialog(null, "Pagamento Effettuato in contanti");
+				if (textField_1.getText().equals("")) {
+					JOptionPane.showMessageDialog(null, "calcola l'importo da pagare");
+					return;
+				}
+				if (rdbtnContanti.isSelected())
+					JOptionPane.showMessageDialog(null, "Pagamento Effettuato in contanti");
 				else
-				
-				JOptionPane.showMessageDialog(null, "Pagamento Effettuato con carta");
+
+					JOptionPane.showMessageDialog(null, "Pagamento Effettuato con carta");
 				btnRefresh.doClick();
 			}
 		});
@@ -210,10 +214,11 @@ public class CalcoloTariffa extends JFrame {// da rifare
 		JButton btnCalcola = new JButton("calcola");
 		btnCalcola.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				if (entrata.equals("") || uscita.equals("") || textField.getText().equals("")|| entrata.equals(uscita)) {
+
+				if (entrata.equals("") || uscita.equals("") || textField.getText().equals("")
+						|| entrata.equals(uscita)) {
 					JOptionPane.showMessageDialog(null,
-			"Seleziona il casello di entrata e il casello di uscita e acqusire la targa del veicolo");
+							"Seleziona il casello di entrata e il casello di uscita e acqusire la targa del veicolo");
 				} else {
 
 					Casello en = new CaselloCTRL().getCaselli(entrata);

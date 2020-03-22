@@ -1,51 +1,29 @@
 package view;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.text.html.HTMLDocument.Iterator;
-
-import view.Login;
 import Controller.AutostradaCTRL;
 import Controller.CaselloCTRL;
-import Controller.LoginController;
 import model.components.Autostrada;
 import model.components.Casello;
-import model.components.Database;
-
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.awt.Color;
-import java.awt.Component;
-
 import javax.swing.JTextField;
-import javax.swing.JTextPane;
-import javax.swing.AbstractButton;
-import javax.swing.GroupLayout;
 
-public class inserisciCaselli extends JFrame {
+public class cancellaCaselli extends JFrame {
 
-	JTextField textField;
+	private JTextField textField;
 	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
 	String a;
 
 	// SCHERMATA INIZIALE
 
-	public inserisciCaselli(String username) {
+	public cancellaCaselli(String username) {
 		getContentPane().setLayout(null);
 		setBounds(100, 100, 462, 353);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -76,22 +54,12 @@ public class inserisciCaselli extends JFrame {
 		getContentPane().add(textField_1);
 		textField_1.setColumns(10);
 
-		textField_2 = new JTextField();
-		textField_2.setBounds(272, 137, 130, 26);
-		getContentPane().add(textField_2);
-		textField_2.setColumns(10);
-
-		textField_3 = new JTextField();
-		textField_3.setBounds(272, 175, 130, 26);
-		getContentPane().add(textField_3);
-		textField_3.setColumns(10);
-
 		// BOTTONE REFRESH
 
 		JButton btnRefresh = new JButton("refresh");
 		btnRefresh.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				inserisciCaselli f = new inserisciCaselli(username);
+				cancellaCaselli f = new cancellaCaselli(username);
 				f.setVisible(true);
 				dispose();
 
@@ -99,8 +67,8 @@ public class inserisciCaselli extends JFrame {
 		});
 		// DIMENSIONI BOTTONE REFRESH
 
-		//btnRefresh.setBounds(198, 6, 117, 29);
-		//getContentPane().add(btnRefresh);
+//btnRefresh.setBounds(198, 6, 117, 29);
+//getContentPane().add(btnRefresh);
 
 		// SERIE DI LABEL
 		JLabel lblAutostrada = new JLabel("autostrada");
@@ -111,47 +79,23 @@ public class inserisciCaselli extends JFrame {
 		lblID.setBounds(47, 104, 76, 16);
 		getContentPane().add(lblID);
 
-		JLabel lblKm = new JLabel("km");
-		lblKm.setBounds(47, 142, 76, 16);
-		getContentPane().add(lblKm);
+		// BOTTONE CANCELLA
 
-		JLabel lblNome = new JLabel("Nome");
-		lblNome.setBounds(47, 180, 61, 16);
-		getContentPane().add(lblNome);
-
-		// BOTTONE INSERISCI
-
-		JButton btnInserisci = new JButton("inserisci");
-		btnInserisci.addActionListener(new ActionListener() {
+		JButton btnCancella = new JButton("Cancella");
+		btnCancella.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				String codice = textField_1.getText();
-				String km = textField_2.getText();
-				String nome = textField_3.getText();
-				String autostrada = textField.getText();
+				Casello c = new Casello(1, textField_1.getText(), textField.getText());
+				new CaselloCTRL().delete(c);
 
-				Casello c = new Casello(Integer.valueOf(km), codice, autostrada);
-
-				int J = JOptionPane.showConfirmDialog(null, "vuoi?", "", 0);
-				if (J == 1) {
-					// ModAutostrada q = new ModAutostrada(user);
-					// q.setVisible(true);
-					// dispose();
-
-				} else {
-					new CaselloCTRL().insert(c);
-
-					btnRefresh.doClick();
-					JOptionPane.showMessageDialog(null, "inserito");
-
-				}
+				btnRefresh.doClick();
 
 			}
 		});
-		// DIMENSIONE BOTTONE INSERISCI
+		// DIMENSIONI BOTTONE CANCELLA
 
-		btnInserisci.setBounds(20, 225, 117, 29);
-		getContentPane().add(btnInserisci);
+		btnCancella.setBounds(47, 224, 117, 29);
+		getContentPane().add(btnCancella);
 
 		// Bottone Mostra Tutto
 
@@ -166,7 +110,7 @@ public class inserisciCaselli extends JFrame {
 		});
 		// Dimensioni bottone Mostra Tutto
 
-		btnMostraTutto.setBounds(285, 225, 117, 29);
+		btnMostraTutto.setBounds(285, 224, 117, 29);
 		getContentPane().add(btnMostraTutto);
 
 		// LABEL CASELLI
