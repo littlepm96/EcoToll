@@ -16,6 +16,7 @@ import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
 
 public class mostra extends JFrame {
+	//generale,solo autostrade, solo caselli di una autostrada 
 	public mostra() {
 		this.setBounds(200, 200, 484, 364);
 		this.setLocation(1000, 1000);

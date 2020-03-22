@@ -85,12 +85,10 @@ public class cancellaCaselli extends JFrame {
 		btnCancella.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				Casello c = new Casello(1, textField_1.getText(),textField.getText());
+				Casello c = new Casello(1, textField_1.getText(), textField.getText());
 				new CaselloCTRL().delete(c);
 
-				
 				btnRefresh.doClick();
-				
 
 			}
 		});

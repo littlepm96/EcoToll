@@ -37,7 +37,6 @@ public class ModAutostrada extends JFrame {
 	private JTextField textField_2;
 	private JTextField textField_3;
 
-
 	public ModAutostrada(String user) {
 		getContentPane().setLayout(null);
 		setBounds(100, 100, 469, 339);
@@ -137,9 +136,9 @@ public class ModAutostrada extends JFrame {
 		codiceComboBox.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				
+
 				String codiceSelected = codiceComboBox.getSelectedItem().toString();
-				Autostrada a=new AutostradaCTRL().getAutostrada(codiceSelected);
+				Autostrada a = new AutostradaCTRL().getAutostrada(codiceSelected);
 				textField_1.setText(a.getId());
 				textField_2.setText(a.getNome());
 				textField_3.setText(a.getTipoToString());

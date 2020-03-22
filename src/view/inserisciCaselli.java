@@ -99,9 +99,6 @@ public class inserisciCaselli extends JFrame {
 		});
 		// DIMENSIONI BOTTONE REFRESH
 
-		//btnRefresh.setBounds(198, 6, 117, 29);
-		//getContentPane().add(btnRefresh);
-
 		// SERIE DI LABEL
 		JLabel lblAutostrada = new JLabel("autostrada");
 		lblAutostrada.setBounds(47, 65, 61, 16);
@@ -124,28 +121,36 @@ public class inserisciCaselli extends JFrame {
 		JButton btnInserisci = new JButton("inserisci");
 		btnInserisci.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-				String codice = textField_1.getText();
-				String km = textField_2.getText();
-				String nome = textField_3.getText();
 				String autostrada = textField.getText();
-
-				Casello c = new Casello(Integer.valueOf(km), codice, autostrada);
-
-				int J = JOptionPane.showConfirmDialog(null, "vuoi?", "", 0);
-				if (J == 1) {
-					// ModAutostrada q = new ModAutostrada(user);
-					// q.setVisible(true);
-					// dispose();
-
-				} else {
-					new CaselloCTRL().insert(c);
-
-					btnRefresh.doClick();
-					JOptionPane.showMessageDialog(null, "inserito");
-
+				Autostrada a = new AutostradaCTRL().getAutostrada(autostrada);
+				ArrayList<Casello> array = new CaselloCTRL().getCaselli(a);
+				String codice = textField_1.getText();
+				for (Casello q : array) {
+					if (q.getId().equals(codice)) {
+						codice = "";
+						break;
+					}
 				}
 
+				String km = textField_2.getText();
+				String nome = textField_3.getText();
+				if (codice.equals("") || km.equals("") || Integer.valueOf(km).equals(null) || Integer.valueOf(km) < 0) {
+
+					JOptionPane.showMessageDialog(null, "casello non valido");
+				} else {
+
+					Casello c = new Casello(Integer.valueOf(km), codice, autostrada, nome);
+
+					int J = JOptionPane.showConfirmDialog(null, "vuoi?", "", 0);
+					if (J == 1) {
+
+					} else {
+						new CaselloCTRL().insert(c);
+
+						btnRefresh.doClick();
+						JOptionPane.showMessageDialog(null, "inserito");
+					}
+				}
 			}
 		});
 		// DIMENSIONE BOTTONE INSERISCI
@@ -158,10 +163,17 @@ public class inserisciCaselli extends JFrame {
 		JButton btnMostraTutto = new JButton("Mostra Tutto");
 		btnMostraTutto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Autostrada q = new AutostradaCTRL().getAutostrada(textField.getText());
-				mostra m = new mostra(q);
-				m.setVisible(true);
-				m.setBounds(200, 200, 450, 339);
+				if (textField.getText().equals("")) {
+					mostra m = new mostra();
+					m.setVisible(true);
+					m.setBounds(200, 200, 450, 339);
+				} else {
+					Autostrada q = new AutostradaCTRL().getAutostrada(textField.getText());
+					mostra m = new mostra(q);
+					m.setVisible(true);
+					m.setBounds(200, 200, 450, 339);
+
+				}
 			}
 		});
 		// Dimensioni bottone Mostra Tutto
@@ -180,8 +192,8 @@ public class inserisciCaselli extends JFrame {
 		codlist = new AutostradaCTRL().getCodAutostrada();
 		codlist.add(0, "");
 		String[] codicevar = new String[codlist.size()];
-		JComboBox jComboBox = new JComboBox(codlist.toArray(codicevar));
-		JComboBox codiceComboBox = jComboBox;
+		JComboBox<String> jComboBox = new JComboBox(codlist.toArray(codicevar));
+		JComboBox<String> codiceComboBox = jComboBox;
 
 		// DIMENSIONI COMBO BOX
 
@@ -207,7 +219,6 @@ public class inserisciCaselli extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				String codiceSelected = (String) comboBox_1.getSelectedItem();
-				textField_1.setText(codiceSelected);
 
 			}
 		});

@@ -35,7 +35,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
 
 public class GestioneAutostrade extends JFrame {
-	
+
 	String a;
 
 	// FINESTRA PRINCIPALE
@@ -69,7 +69,7 @@ public class GestioneAutostrade extends JFrame {
 				cancellaAutostrade f = new cancellaAutostrade(user);
 				f.setVisible(true);
 				dispose();
-			
+
 			}
 		});
 		// DIMENSIONI BOTTONE CANCELLA
@@ -86,7 +86,6 @@ public class GestioneAutostrade extends JFrame {
 				f.setVisible(true);
 				dispose();
 
-				
 			}
 		});
 		// DIMENSIONE BOTTONE INSERISCI
