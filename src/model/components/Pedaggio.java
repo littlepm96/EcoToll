@@ -3,7 +3,7 @@ package model.components;
 import model.interfaces.PedaggioInter;
 
 public class Pedaggio implements PedaggioInter {
-	private int iva = 22;
+	//private int iva = 22;
 	private Percorso percorso;
 	private Autostrada autostrada;
 	private Veicolo v;
@@ -38,9 +38,9 @@ public class Pedaggio implements PedaggioInter {
 		return iva;
 	}
 
-	public void setIva(int iva) {
-		this.iva = iva;
-	}
+	//public void setIva(int iva) {
+		//this.iva = iva;
+	//}
 
 	public Percorso getPercorso() {
 		return percorso;
@@ -115,28 +115,28 @@ public class Pedaggio implements PedaggioInter {
 	@Override
 	public double tariffaFinale(ClasseA g) {
 
-		return arrotondamento(this.tarParziale(g) + (this.tarParziale(g) * this.iva / 100) + this.oneri());
+		return arrotondamento(this.tarParziale(g) + (this.tarParziale(g) * PedaggioInter.iva / 100) + this.oneri());
 	}
 
 	@Override
 	public double tariffaFinale(ClasseB a) {
 
-		return arrotondamento(this.tarParziale(a) + (this.tarParziale(a) * this.iva / 100) + this.oneri());
+		return arrotondamento(this.tarParziale(a) + (this.tarParziale(a) * PedaggioInter.iva / 100) + this.oneri());
 	}
 
 	@Override
 	public double tariffaFinale(Classe3 a) {
-		return arrotondamento(this.tarParziale(a) + (this.tarParziale(a) * this.iva / 100) + this.oneri());
+		return arrotondamento(this.tarParziale(a) + (this.tarParziale(a) * PedaggioInter.iva / 100) + this.oneri());
 	}
 
 	@Override
 	public double tariffaFinale(Classe4 a) {
-		return arrotondamento(this.tarParziale(a) + (this.tarParziale(a) * this.iva / 100) + this.oneri());
+		return arrotondamento(this.tarParziale(a) + (this.tarParziale(a) * PedaggioInter.iva / 100) + this.oneri());
 	}
 
 	@Override
 	public double tariffaFinale(Classe5 a) {
-		return arrotondamento(this.tarParziale(a) + (this.tarParziale(a) * this.iva / 100) + this.oneri());
+		return arrotondamento(this.tarParziale(a) + (this.tarParziale(a) * PedaggioInter.iva / 100) + this.oneri());
 	}
 
 	public double tarParziale(ClasseA a) {
