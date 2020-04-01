@@ -8,6 +8,7 @@ import model.components.ClasseB;
 import model.components.Veicolo;
 
 public interface PedaggioInter {
+	int iva = 22;
 
 	public double arrotondamento(double a);
 
