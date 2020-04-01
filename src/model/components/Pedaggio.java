@@ -3,7 +3,7 @@ package model.components;
 import model.interfaces.PedaggioInter;
 
 public class Pedaggio implements PedaggioInter {
-	//private int iva = 22;
+	
 	private Percorso percorso;
 	private Autostrada autostrada;
 	private Veicolo v;
@@ -38,9 +38,7 @@ public class Pedaggio implements PedaggioInter {
 		return iva;
 	}
 
-	//public void setIva(int iva) {
-		//this.iva = iva;
-	//}
+	
 
 	public Percorso getPercorso() {
 		return percorso;
