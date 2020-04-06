@@ -176,12 +176,7 @@ public abstract class Veicolo implements Veicolointer {
 		return 0;
 	}
 
-	public Veicolo factory(Veicolo v) {
-		Veicolo a = new ClasseA(v);
-		a = a.factory();
-		a.reclass();
-		return a;
-	}
+
 
 	@Override
 	public Veicolo factory(String targa, String modello, String marca, int anno, int peso, double co22, int assi,
@@ -201,7 +196,13 @@ public abstract class Veicolo implements Veicolointer {
 
 		return a;
 	}
-
+	
+	public Veicolo factory(Veicolo v) {
+		Veicolo a = new ClasseA(v);
+		a = a.factory();
+		a.reclass();
+		return a;
+	}
 	@Override
 	public Veicolo factory() {
 
