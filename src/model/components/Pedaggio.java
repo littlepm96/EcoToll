@@ -109,7 +109,7 @@ public class Pedaggio implements PedaggioInter {
 		return oneri();
 
 	}
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////7
 	@Override
 	public double tariffaFinale(ClasseA g) {
 
@@ -137,6 +137,8 @@ public class Pedaggio implements PedaggioInter {
 		return arrotondamento(this.tarParziale(a) + (this.tarParziale(a) * PedaggioInter.iva / 100) + this.oneri());
 	}
 
+	
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////77
 	public double tarParziale(ClasseA a) {
 		return this.percorso.KmPercorsi() * (this.autostrada.getTariffe()[0]);
 	}

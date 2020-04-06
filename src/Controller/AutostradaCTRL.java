@@ -10,11 +10,15 @@ public class AutostradaCTRL {
 		return new AutostradaDAO().getAutostrada(id);
 	}
 
-	public ArrayList<String> getCodAutostrada() {
-		return new AutostradaDAO().getCod();
-	}
+
 	public ArrayList<Autostrada> getAutostrada() {
 		return new AutostradaDAO().getAutostrada();
+	}
+	
+	
+	
+	public ArrayList<String> getCodAutostrada() {
+		return new AutostradaDAO().getCod();
 	}
 
 	public void modAutostrada(Autostrada a) {
