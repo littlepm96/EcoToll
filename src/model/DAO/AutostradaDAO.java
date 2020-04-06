@@ -111,8 +111,19 @@ public class AutostradaDAO {
 	}
 
 	public void modAuto(Autostrada a) {
+		ArrayList<Casello> arrayee = new CaselloDAO().getCaselli(a);
+		
+		
 		delete(a);
 		insert(a);
+		
+		for(Casello c:arrayee) {
+			new CaselloDAO().insert(c);
+		}
+		
+		
+
+	
 		
 
 	}
